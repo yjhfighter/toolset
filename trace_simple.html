@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="http://app100646281.imgcache.qzoneapp.com/app100646281/s1/js/jquery.min.js"></script>
+<script type="text/javascript">
+var begin = (new Date()).valueOf();
+var trace_data = new Object();
+function traceAttr(name,value){
+	trace_data[name]=value;
+}
+function traceTag(tag){
+	trace_data[tag]=(new Date()).valueOf()-begin;
+}
+window.onload = function(){
+	traceTag('onload');
+};
+window.onbeforeunload = function(){
+	traceTag('unload');
+	jQuery.ajax ({
+		async: false,
+		url: 'http://localhost:3000/unloading',
+		type: 'Post',
+		data: trace_data
+	});
+}
+
+traceAttr('roleid',123321);
+traceAttr('serverid','s1');
+traceAttr('openid','testxxxx');
+</script>
+</head>
+<body>
+TEST PAGE!
+<body>
+</html>

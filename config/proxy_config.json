@@ -1,0 +1,6 @@
+{
+	"proxy_port":3000,
+	"sandbox":{"host":"baidu.com","port":"80","path":"/"},
+	"production":{"host":"sina.qsmy.qins.com","port":"80","path":"/pay/buy"},
+	"sandbox_uids":[1,2,3]
+}
