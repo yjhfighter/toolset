@@ -26,9 +26,10 @@ app.post('/trace',function(req,res){
       var server = req.body.serverid;
       var trace_data = querystring.stringify(req.body);
       var user_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+      var user_agent = req.headers['User-Agent'];
 
-  		connection.query('insert into trace_data ( role_id,open_id,server,trace_data,user_ip) values ( ? ,? ,? ,?, ?)',
-        [role_id,open_id,server,trace_data,user_ip],function(err,rows){
+  		connection.query('insert into trace_data ( role_id,open_id,server,trace_data,user_ip,user_agent) values ( ? ,? ,? ,?, ?, ?)',
+        [role_id,open_id,server,trace_data,user_ip,user_agent],function(err,rows){
 
       connection.release();
       })
