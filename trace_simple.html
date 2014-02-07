@@ -4,6 +4,7 @@
 <script type="text/javascript">
 var begin = (new Date()).valueOf();
 var trace_data = new Object();
+var posted = false;
 function traceAttr(name,value){
 	trace_data[name]=value;
 }
@@ -15,12 +16,15 @@ window.onload = function(){
 };
 window.onbeforeunload = function(){
 	traceTag('unload');
-	jQuery.ajax ({
-		async: false,
-		url: 'http://localhost:3000/trace',
-		type: 'Post',
-		data: trace_data
-	});
+	if(!posted){
+		posted = true;
+		jQuery.ajax ({
+			async: false,
+			url: 'http://localhost:3000/trace',
+			type: 'Post',
+			data: trace_data
+		});
+	}
 }
 
 traceAttr('roleid',123321);
